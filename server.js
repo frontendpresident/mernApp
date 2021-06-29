@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser')
 
 const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
@@ -10,10 +11,18 @@ app.get('/', (req, res) => {
    return res.send('Hello!')
 });
 
+//DB config
 const db = require('./config/keys').URL
 
+//Body parser
+app.use(express.urlencoded({extended: false}));
+app.use(express.json())
+
 mongoose
-   .connect(db, { useUnifiedTopology: true })
+   .connect(db, { 
+      useUnifiedTopology: true,
+      useNewUrlParser: true
+    })
    .then(() => console.log('Connect date base MongoDB'))
    .catch((err) => console.log(`Error: ${err}`))
 
