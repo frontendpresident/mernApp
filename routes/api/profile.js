@@ -72,7 +72,6 @@ router.get('/all', (req, res) => {
 })
 
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
-    console.log(req)
     const profileFields = {};
     profileFields.user = req.user.id
 
