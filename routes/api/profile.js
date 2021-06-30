@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
-const profile = require('../../models/profile');
 const Profile = require('../../models/profile');
 const User = require('../../models/user');
+const validateProfileInput = require('../../validation/profile')
 
 router.get('/test', (req, res) => res.json({ message: "Profile Working" }));
 
@@ -12,7 +12,9 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
     const errors = {};
 
     Profile.findOne({ user: req.user.id })
+        .populate('user', ['name', 'avatar']) //Разобраться почему не работает?????!!!
         .then(profile => {
+            console.log(profile)
             if (!profile) {
                 errors.profile = 'Профиль не найден'
                 return res.status(404).json(errors)
@@ -22,10 +24,16 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
         .catch(err => console.log(err))
 })
 
-router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
-    const errors = {}
+router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+    console.log(req)
     const profileFields = {};
-    profileFields.user = req.body.user
+    profileFields.user = req.user.id
+
+    const { errors, isValid } = validateProfileInput(req.body)
+
+    if (!isValid) {
+        return res.status(400).json(errors)
+    }
 
     if (req.body.handle) profileFields.handle = req.body.handle;
     if (req.body.company) profileFields.company = req.body.company;
@@ -43,18 +51,18 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
     if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
     if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
 
-    Profile.findOne({ user: req.body.id })
+    Profile.findOne({ user: req.user.id })
         .then(profile => {
             if (profile) {
                 Profile.findOneAndUpdate(
-                    { user: req.body.id },
+                    { user: req.user.id },
                     { $set: profileFields },
                     { new: true }
                 )
                     .then(profile => res.json(profile));
             }
             else {
-                Profile.findOne({ handle: req.body.handle })
+                Profile.findOne({ handle: profileFields.handle })
                     .then(profile => {
                         if (profile) {
                             errors.handle = 'Этот файл уже существует';
