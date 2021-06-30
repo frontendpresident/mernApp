@@ -12,7 +12,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
     const errors = {};
 
     Profile.findOne({ user: req.user.id })
-        .populate('user', ['name', 'avatar']) //Разобраться почему не работает?????!!!
+        .populate('user', ['name', 'avatar'])
         .then(profile => {
             console.log(profile)
             if (!profile) {
@@ -22,6 +22,50 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
             res.json(profile)
         })
         .catch(err => console.log(err))
+})
+
+router.get('/handle/:handle', (req, res) => {
+    const errors = {}
+
+    Profile.findOne({ handle: req.params.handle })
+        .populate('user', ['name', 'avatar'])
+        .then(profile => {
+            if (!profile) {
+                errors.noprofile = 'Профайл пользователя не найден'
+                res.status(404).json(errors)
+            }
+            res.json(profile)
+        })
+        .catch(err => console.log(err))
+})
+
+router.get('/user/:user_id', (req, res) => {
+    const errors = {}
+
+    Profile.findOne({ user: req.params.user_id })
+        .populate('user', ['name', 'avatar'])
+        .then(profile => {
+            if (!profile) {
+                errors.noprofile = 'Профайл пользователя не найден'
+                res.status(404).json(errors)
+            }
+            res.json(profile)
+        })
+        .catch(err => console.log(err))
+})
+
+router.get('/all', (req, res) => {
+    const errors = {}
+    Profile.find()
+        .populate('user', ['name', 'avatar'])
+        .then(profile => {
+            if (!profile) {
+                errors.noProfiles = 'Профайлы не найдены'
+                res.status(404).json(errors)
+            }
+            res.json(profile)
+        })
+        .catch(err => res.status(404).json(err))
 })
 
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
