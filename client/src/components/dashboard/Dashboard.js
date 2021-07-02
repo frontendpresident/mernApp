@@ -26,6 +26,17 @@ class Dashboard extends React.Component {
                 <h1>test</h1>
             )
         }
+
+        if(Object.keys(profile).length === 0){
+            dashboardContent = <h1>Added Profile please.</h1>
+        }
+        else {
+            dashboardContent = (
+                <div className='container'>
+                   
+                </div>
+            )
+        }
         return (
             <div>
                 <div class="dashboard">
