@@ -69,11 +69,11 @@ class Register extends React.Component {
                                 />
                                 <TextFieldGroup
                                     placeholder="Email Address"
-                                    name="name"
-                                    type="name"
-                                    value={this.state.name}
+                                    name="email"
+                                    type="email"
+                                    value={this.state.email}
                                     onChange={this.onChange}
-                                    error={errors.name}
+                                    error={errors.email}
                                     info="This site uses Gravatar so if you want a profile image, use a Gravatar email"
                                 />
                                 <TextFieldGroup

@@ -1,6 +1,6 @@
 import './App.css';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 import setAutToken from './utils/setAutToken';
@@ -14,6 +14,11 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import store from './redux/store';
 import Dashboard from './components/dashboard/Dashboard';
+import PrivateRoute from './components/common/PrivateRoute';
+import CreateProfile from './components/createProfile/CreateProfile';
+import EditProfile from './components/edit-profile/EditProfile';
+import AddExperience from './components/add-credentials/AddExperience';
+import AddEducation from './components/add-credentials/AddEducation';
 
 if (localStorage.jwtToken) {
   setAutToken(localStorage.jwtToken)
@@ -39,11 +44,25 @@ function App() {
           <div className="container">
             <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Login} />
-            <Route exact path='/dashboard' component={Dashboard} />
+            <Switch>
+                <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/create-profile" component={CreateProfile} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/edit-profile" component={EditProfile} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/add-education" component={AddEducation} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/add-experience" component={AddExperience} />
+              </Switch>
           </div>
           <Footer />
         </div>
-      </Router>\
+      </Router>
     </Provider>
   );
 }

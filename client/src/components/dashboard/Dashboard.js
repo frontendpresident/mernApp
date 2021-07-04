@@ -1,8 +1,12 @@
 import React from 'react'
 import propTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getCurrentProfile } from '../../redux/reducers/profileReducer'
+import { getCurrentProfile, deleteAccount } from '../../redux/reducers/profileReducer'
 import Preloader from '../common/Preloader'
+import { Link } from 'react-router-dom'
+import ProfileActions from './ProfileActions';
+import Education from './Education'
+import Experience from './Experience'
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -12,6 +16,11 @@ class Dashboard extends React.Component {
         this.props.getCurrentProfile()
     }
 
+    onDeleteClick(e) {
+        this.props.deleteAccount();
+    }
+
+
     render() {
         const { user } = this.props.auth
         const { profile, loading } = this.props.profile
@@ -19,36 +28,46 @@ class Dashboard extends React.Component {
         let dashboardContent;
 
         if (profile === null || loading) {
-            dashboardContent = <Preloader />
-        }
-        else {
-            dashboardContent = (
-                <h1>test</h1>
-            )
+            dashboardContent = <Preloader />;
+        } else {
+            if (Object.keys(profile).length > 0) {
+                dashboardContent = (
+                    <div>
+                        <p className="lead text-muted">
+                            Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
+                        </p>
+                        <ProfileActions />
+                        <Experience experience={profile.experience} />
+                        <Education education={profile.education} />
+                        <div style={{ marginBottom: '60px' }} />
+                        <button
+                            onClick={this.onDeleteClick.bind(this)}
+                            className="btn btn-danger"
+                        >
+                            Delete My Account</button>
+                    </div>
+                );
+            } else {
+                dashboardContent = (
+                    <div>
+                        <p className="lead text-muted">Welcome {user.name}</p>
+                        <p>You have not yet setup a profile, please add some info</p>
+                        <Link to="/create-profile" className="btn btn-lg btn-info">
+                            Create Profile
+                        </Link>
+                    </div>
+                );
+            }
         }
 
-        if(Object.keys(profile).length === 0){
-            dashboardContent = <h1>Added Profile please.</h1>
-        }
-        else {
-            dashboardContent = (
-                <div className='container'>
-                   
-                </div>
-            )
-        }
+
         return (
-            <div>
-                <div class="dashboard">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h1 class="display-4">Dashboard</h1>
-                                <div class="btn-group mb-4" role="group">
-                                    <h1>TEST</h1>                                 
-                                </div>
-                                {dashboardContent}
-                            </div>
+            <div className="dashboard">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <h1 className="display-4">Dashboard</h1>
+                            {dashboardContent}
                         </div>
                     </div>
                 </div>
@@ -69,4 +88,4 @@ const mapStateToProps = (state) => {
         auth: state.auth
     }
 }
-export default connect(mapStateToProps, { getCurrentProfile })(Dashboard)
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(Dashboard)

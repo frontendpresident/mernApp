@@ -16,14 +16,13 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
     Profile.findOne({ user: req.user.id })
         .populate('user', ['name', 'avatar'])
         .then(profile => {
-            console.log(profile)
             if (!profile) {
                 errors.profile = 'Профиль не найден'
                 return res.status(404).json(errors)
             }
             res.json(profile)
         })
-        .catch(err => console.log(err))
+        .catch(err => res.status(404).json(err));
 })
 
 router.get('/handle/:handle', (req, res) => {
