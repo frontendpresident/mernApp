@@ -16,7 +16,7 @@ class CommentItem extends Component {
       <div className="card card-body mb-3">
         <div className="row">
           <div className="col-md-2">
-            <Link to="/profile/:handle">
+            <Link to="/profile">
             <img className="avatar"
                    src={comment.avatar}
                    alt=""/>
