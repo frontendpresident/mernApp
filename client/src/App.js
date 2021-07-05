@@ -21,6 +21,8 @@ import AddExperience from './components/add-credentials/AddExperience';
 import AddEducation from './components/add-credentials/AddEducation';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
+import Posts from './components/posts/Posts';
+import Post from './components/post/Post';
 
 if (localStorage.jwtToken) {
   setAutToken(localStorage.jwtToken)
@@ -62,6 +64,12 @@ function App() {
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/add-experience" component={AddExperience} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/feed" component={Posts} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/post/:id" component={Post} />
               </Switch>
           </div>
           <Footer />
