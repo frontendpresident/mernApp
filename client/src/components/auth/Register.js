@@ -1,9 +1,8 @@
 import React from 'react'
-import classnames from 'classnames'
 import propTypes from 'prop-types'
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { registerActions } from "../../redux/reducers/authReducer";
+import { registerUser } from "../../redux/reducers/authReducer";
 import TextFieldGroup from '../common/TextFieldGroup';
 
 class Register extends React.Component {
@@ -45,7 +44,7 @@ class Register extends React.Component {
             password: this.state.password,
             password2: this.state.password2
         }
-        this.props.registerActions(newUser, this.props.history)
+        this.props.registerUser(newUser, this.props.history)
     }
 
     render() {
@@ -87,7 +86,7 @@ class Register extends React.Component {
                                 <TextFieldGroup
                                     placeholder="Confirm password"
                                     name="password2"
-                                    type="password2"
+                                    type="password"
                                     value={this.state.password2}
                                     onChange={this.onChange}
                                     error={errors.password2}
@@ -103,7 +102,7 @@ class Register extends React.Component {
 }
 
 Register.propTypes = {
-    registerActions: propTypes.func.isRequired,
+    registerUser: propTypes.func.isRequired,
     auth: propTypes.object.isRequired,
     errors: propTypes.object.isRequired
 }
@@ -115,4 +114,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { registerActions })(withRouter(Register))
+export default connect(mapStateToProps, { registerUser })(withRouter(Register))

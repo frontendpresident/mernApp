@@ -2,17 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types'
 import { logoutUser } from '../../redux/reducers/authReducer';
-import { clearCurrenProfile } from '../../redux/reducers/profileReducer';
+import { clearCurrentProfile } from '../../redux/reducers/profileReducer';
 import { connect } from 'react-redux';
 
 class Navbar extends React.Component {
   constructor(props) {
     super(props)
+
+    this.onClickLogout = this.onClickLogout.bind(this)
   }
 
   onClickLogout(e) {
     e.preventDefault()
-    this.props.clearCurrenProfile()
+    this.props.clearCurrentProfile()
     this.props.logoutUser()
   }
 
@@ -22,7 +24,7 @@ class Navbar extends React.Component {
     const authLink = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
-          <a onClick={this.onClickLogout.bind(this)} className="nav-link">
+          <a onClick={this.onClickLogout} className="nav-link">
             <img
               src={user.avatar}
               alt={user.name}
@@ -81,5 +83,5 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   logoutUser,
-  clearCurrenProfile
+  clearCurrentProfile
 })(Navbar);

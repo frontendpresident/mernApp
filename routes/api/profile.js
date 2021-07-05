@@ -130,7 +130,7 @@ router.post('/experience', passport.authenticate('jwt', { session: false }), (re
     Profile.findOne({ user: req.user.id })
         .then(profile => {
             const newExp = {
-                tittle: req.body.tittle,
+                title: req.body.title,
                 company: req.body.company,
                 location: req.body.location,
                 from: req.body.from,

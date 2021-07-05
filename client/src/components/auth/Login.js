@@ -88,7 +88,7 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-    loginActions: PropTypes.func.isRequired,
+    loginUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };

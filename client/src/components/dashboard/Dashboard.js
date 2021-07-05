@@ -9,9 +9,6 @@ import Education from './Education'
 import Experience from './Experience'
 
 class Dashboard extends React.Component {
-    constructor(props) {
-        super(props)
-    }
     componentDidMount() {
         this.props.getCurrentProfile()
     }

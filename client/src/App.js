@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 import setAutToken from './utils/setAutToken';
 import { logoutUser, setCurrentUser } from './redux/reducers/authReducer';
-import { clearCurrenProfile } from './redux/reducers/profileReducer';
+import { clearCurrentProfile } from './redux/reducers/profileReducer';
 
 import Landing from './components/layout/Landing';
 import Navbar from './components/layout/Navbar'
@@ -19,6 +19,8 @@ import CreateProfile from './components/createProfile/CreateProfile';
 import EditProfile from './components/edit-profile/EditProfile';
 import AddExperience from './components/add-credentials/AddExperience';
 import AddEducation from './components/add-credentials/AddEducation';
+import Profiles from './components/profiles/Profiles';
+import Profile from './components/profile/Profile';
 
 if (localStorage.jwtToken) {
   setAutToken(localStorage.jwtToken)
@@ -29,7 +31,7 @@ if (localStorage.jwtToken) {
   const currentDate = Date.now() / 1000
   if (decode.exp < currentDate) {
     store.dispatch(logoutUser())
-    store.dispatch(clearCurrenProfile())
+    store.dispatch(clearCurrentProfile())
     window.location.href = '/login'
   }
 }
@@ -44,6 +46,8 @@ function App() {
           <div className="container">
             <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Login} />
+            <Route exact path="/profiles" component={Profiles} />
+            <Route exact path="/profile/:handle" component={Profile} />
             <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
               </Switch>

@@ -13,8 +13,8 @@ module.exports = function validateRegistrInput(data) {
         errors.name = 'Имя должно быть длиннее 5 символов и короче 15'
     }
 
-    if(!Validator.isLength(data.password, {min: 5, max: 50})){
-        errors.password = 'Пароль должен быть минимум 5 символов'
+    if(!Validator.isLength(data.password, {min: 6, max: 50})){
+        errors.password = 'Пароль должен быть минимум 6 символов'
     }
 
     if (Validator.isEmpty(data.name)) {
