@@ -1,10 +1,13 @@
-
-import React from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import classnames from "classnames";
-import { Link } from "react-router-dom";
-import { deletePost, addLike, removeLike } from "../../redux/reducers/postReducer";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import classnames from 'classnames';
+import { Link } from 'react-router-dom';
+import {
+  deletePost,
+  addLike,
+  removeLike,
+} from '../../redux/reducers/postReducer';
 
 class PostItem extends React.Component {
   onDeleteClick(id) {
@@ -21,7 +24,7 @@ class PostItem extends React.Component {
 
   findUserLike(likes) {
     const { auth } = this.props;
-    if (likes.filter(like => like.user === auth.user.id).length > 0) {
+    if (likes.filter((like) => like.user === auth.user.id).length > 0) {
       return true;
     } else {
       return false;
@@ -35,11 +38,11 @@ class PostItem extends React.Component {
       <div className="card card-body mb-3">
         <div className="row">
           <div className="col-md-2">
-              <img
-                className="avatar"
-                src={post.avatar}
-                alt="Profile pic of poster"
-              />
+            <img
+              className="avatar"
+              src={post.avatar}
+              alt="Profile pic of poster"
+            />
             <br />
             <p className="text-center">{post.name}</p>
           </div>
@@ -53,8 +56,8 @@ class PostItem extends React.Component {
                   className="btn btn-light mr-1"
                 >
                   <i
-                    className={classnames("fa fa-thumbs-up", {
-                      "text-info": this.findUserLike(post.likes)
+                    className={classnames('fa fa-thumbs-up', {
+                      'text-info': this.findUserLike(post.likes),
                     })}
                   />
                   <span className="badge badge-light">{post.likes.length}</span>
@@ -88,7 +91,7 @@ class PostItem extends React.Component {
 }
 
 PostItem.defaultProps = {
-  showActions: true
+  showActions: true,
 };
 
 PostItem.propTypes = {
@@ -96,11 +99,13 @@ PostItem.propTypes = {
   addLike: PropTypes.func.isRequired,
   removeLike: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
+const mapStateToProps = (state) => ({
+  auth: state.auth,
 });
 
-export default connect(mapStateToProps, { deletePost, addLike, removeLike })(PostItem);
+export default connect(mapStateToProps, { deletePost, addLike, removeLike })(
+  PostItem,
+);

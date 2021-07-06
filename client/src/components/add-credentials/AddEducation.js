@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import TextFieldGroup from '../common/TextFieldGroup';
@@ -19,7 +18,7 @@ class AddEducation extends Component {
       current: false,
       description: '',
       errors: {},
-      disabled: false
+      disabled: false,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -43,7 +42,7 @@ class AddEducation extends Component {
       from: this.state.from,
       to: this.state.to,
       current: this.state.current,
-      description: this.state.description
+      description: this.state.description,
     };
 
     this.props.addEducation(eduData, this.props.history);
@@ -56,7 +55,7 @@ class AddEducation extends Component {
   onCheck(e) {
     this.setState({
       disabled: !this.state.disabled,
-      current: !this.state.current
+      current: !this.state.current,
     });
   }
 
@@ -82,26 +81,30 @@ class AddEducation extends Component {
                   name="school"
                   value={this.state.school}
                   onChange={this.onChange}
-                  error={errors.school} />
+                  error={errors.school}
+                />
                 <TextFieldGroup
                   placeholder="* Degree or Certification"
                   name="degree"
                   value={this.state.degree}
                   onChange={this.onChange}
-                  error={errors.degree} />
+                  error={errors.degree}
+                />
                 <TextFieldGroup
                   placeholder="* Field of Study"
                   name="fieldofstudy"
                   value={this.state.fieldofstudy}
                   onChange={this.onChange}
-                  error={errors.fieldofstudy} />
+                  error={errors.fieldofstudy}
+                />
                 <h6>From Date</h6>
                 <TextFieldGroup
                   name="from"
                   type="date"
                   value={this.state.from}
                   onChange={this.onChange}
-                  error={errors.from} />
+                  error={errors.from}
+                />
                 <h6>To Date</h6>
                 <TextFieldGroup
                   name="to"
@@ -109,7 +112,8 @@ class AddEducation extends Component {
                   value={this.state.to}
                   onChange={this.onChange}
                   error={errors.to}
-                  disabled={this.state.disabled ? 'disabled' : ''} />
+                  disabled={this.state.disabled ? 'disabled' : ''}
+                />
                 <div className="form-check mb-4">
                   <input
                     type="checkbox"
@@ -118,7 +122,8 @@ class AddEducation extends Component {
                     value={this.state.current}
                     checked={this.state.current}
                     onChange={this.onCheck}
-                    id="current" />
+                    id="current"
+                  />
                   <label htmlFor="current" className="form-check-label">
                     Current Job
                   </label>
@@ -129,11 +134,13 @@ class AddEducation extends Component {
                   value={this.state.description}
                   onChange={this.onChange}
                   error={errors.description}
-                  info="Tell us about the program that you were in" />
+                  info="Tell us about the program that you were in"
+                />
                 <input
                   type="submit"
                   value="Submit"
-                  className="btn btn-info btn-block mt-4"/>
+                  className="btn btn-info btn-block mt-4"
+                />
               </form>
             </div>
           </div>
@@ -146,14 +153,14 @@ class AddEducation extends Component {
 AddEducation.propTypes = {
   addEducation: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   profile: state.profile,
-  errors: state.errors
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, { addEducation })(
-  withRouter(AddEducation)
+  withRouter(AddEducation),
 );

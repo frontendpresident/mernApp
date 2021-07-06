@@ -1,18 +1,17 @@
-
-import React, { Component } from "react";
-import Moment from "react-moment";
+import React, { Component } from 'react';
+import Moment from 'react-moment';
 
 class ProfileCreds extends Component {
   render() {
     const { experience, education } = this.props;
 
-    const expItems = experience.map(exp => (
+    const expItems = experience.map((exp) => (
       <li key={exp._id} className="list-group-item">
         <h4>{exp.company}</h4>
         <p>
           <Moment date={exp.from} format="DD/MM/YYYY" /> -
           {exp.to === null ? (
-            " Now"
+            ' Now'
           ) : (
             <Moment date={exp.to} format="DD/MM/YYYY" />
           )}
@@ -21,14 +20,14 @@ class ProfileCreds extends Component {
           <strong>Position:</strong> {exp.title}
         </p>
         <p>
-          {exp.location === "" ? null : (
+          {exp.location === '' ? null : (
             <span>
               <strong>Location:</strong> {exp.location}
             </span>
           )}
         </p>
         <p>
-          {exp.description === "" ? null : (
+          {exp.description === '' ? null : (
             <span>
               <strong>Description:</strong> {exp.description}
             </span>
@@ -37,13 +36,13 @@ class ProfileCreds extends Component {
       </li>
     ));
 
-    const eduItems = education.map(edu => (
+    const eduItems = education.map((edu) => (
       <li key={edu._id} className="list-group-item">
         <h4>{edu.school}</h4>
         <p>
           <Moment date={edu.from} format="DD/MM/YYYY" /> -
           {edu.to === null ? (
-            " Now"
+            ' Now'
           ) : (
             <Moment date={edu.to} format="DD/MM/YYYY" />
           )}
@@ -57,7 +56,7 @@ class ProfileCreds extends Component {
         </p>
 
         <p>
-          {edu.description === "" ? null : (
+          {edu.description === '' ? null : (
             <span>
               <strong>Description:</strong> {edu.description}
             </span>

@@ -1,11 +1,9 @@
- 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Preloader from '../common/Preloader';
 import ProfileItem from './ProfileItem';
 import { getProfiles } from '../../redux/reducers/profileReducer';
-
 
 class Profiles extends Component {
   componentDidMount() {
@@ -20,7 +18,7 @@ class Profiles extends Component {
       profileItems = <Preloader />;
     } else {
       if (profiles.length > 0) {
-        profileItems = profiles.map(profile => (
+        profileItems = profiles.map((profile) => (
           <ProfileItem key={profile._id} profile={profile} />
         ));
       } else {
@@ -48,11 +46,11 @@ class Profiles extends Component {
 
 Profiles.propTypes = {
   getProfiles: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  profile: state.profile
+const mapStateToProps = (state) => ({
+  profile: state.profile,
 });
 
 export default connect(mapStateToProps, { getProfiles })(Profiles);

@@ -16,9 +16,7 @@ class CommentItem extends Component {
       <div className="card card-body mb-3">
         <div className="row">
           <div className="col-md-2">
-            <img className="avatar"
-                   src={comment.avatar}
-                   alt=""/>
+            <img className="avatar" src={comment.avatar} alt="" />
             <br />
             <p className="text-center">{comment.name}</p>
           </div>
@@ -28,7 +26,8 @@ class CommentItem extends Component {
               <button
                 onClick={this.onDeleteClick.bind(this, postId, comment._id)}
                 type="button"
-                className="btn btn-danger mr-1">
+                className="btn btn-danger mr-1"
+              >
                 <i className="fas fa-times" />
               </button>
             ) : null}
@@ -43,11 +42,11 @@ CommentItem.propTypes = {
   deleteComment: PropTypes.func.isRequired,
   comment: PropTypes.object.isRequired,
   postId: PropTypes.string.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
+const mapStateToProps = (state) => ({
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { deleteComment })(CommentItem);

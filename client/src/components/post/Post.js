@@ -1,12 +1,12 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import PostItem from "../posts/PostItem";
-import CommentForm from "./CommentForm";
-import CommentFeed from "./CommentFeed";
-import Preloader from "../common/Preloader";
-import { getPost } from "../../redux/reducers/postReducer";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import PostItem from '../posts/PostItem';
+import CommentForm from './CommentForm';
+import CommentFeed from './CommentFeed';
+import Preloader from '../common/Preloader';
+import { getPost } from '../../redux/reducers/postReducer';
 
 class Post extends React.Component {
   componentDidMount() {
@@ -48,11 +48,11 @@ class Post extends React.Component {
 
 Post.propTypes = {
   getPost: PropTypes.func.isRequired,
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  post: state.post
+const mapStateToProps = (state) => ({
+  post: state.post,
 });
 
 export default connect(mapStateToProps, { getPost })(Post);

@@ -18,7 +18,7 @@ class AddExperience extends Component {
       current: false,
       description: '',
       errors: {},
-      disabled: false
+      disabled: false,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -42,7 +42,7 @@ class AddExperience extends Component {
       from: this.state.from,
       to: this.state.to,
       current: this.state.current,
-      description: this.state.description
+      description: this.state.description,
     };
 
     this.props.addExperience(expData, this.props.history);
@@ -55,7 +55,7 @@ class AddExperience extends Component {
   onCheck(e) {
     this.setState({
       disabled: !this.state.disabled,
-      current: !this.state.current
+      current: !this.state.current,
     });
   }
 
@@ -81,26 +81,30 @@ class AddExperience extends Component {
                   name="company"
                   value={this.state.company}
                   onChange={this.onChange}
-                  error={errors.company} />
+                  error={errors.company}
+                />
                 <TextFieldGroup
                   placeholder="* Job Title"
                   name="title"
                   value={this.state.title}
                   onChange={this.onChange}
-                  error={errors.title} />
+                  error={errors.title}
+                />
                 <TextFieldGroup
                   placeholder="Location"
                   name="location"
                   value={this.state.location}
                   onChange={this.onChange}
-                  error={errors.location} />
+                  error={errors.location}
+                />
                 <h6>From Date</h6>
                 <TextFieldGroup
                   name="from"
                   type="date"
                   value={this.state.from}
                   onChange={this.onChange}
-                  error={errors.from} />
+                  error={errors.from}
+                />
                 <h6>To Date</h6>
                 <TextFieldGroup
                   name="to"
@@ -108,7 +112,8 @@ class AddExperience extends Component {
                   value={this.state.to}
                   onChange={this.onChange}
                   error={errors.to}
-                  disabled={this.state.disabled ? 'disabled' : ''} />
+                  disabled={this.state.disabled ? 'disabled' : ''}
+                />
                 <div className="form-check mb-4">
                   <input
                     type="checkbox"
@@ -117,7 +122,8 @@ class AddExperience extends Component {
                     value={this.state.current}
                     checked={this.state.current}
                     onChange={this.onCheck}
-                    id="current"  />
+                    id="current"
+                  />
                   <label htmlFor="current" className="form-check-label">
                     Current Job
                   </label>
@@ -128,11 +134,13 @@ class AddExperience extends Component {
                   value={this.state.description}
                   onChange={this.onChange}
                   error={errors.description}
-                  info="Tell us about the the position" />
+                  info="Tell us about the the position"
+                />
                 <input
                   type="submit"
                   value="Submit"
-                  className="btn btn-info btn-block mt-4" />
+                  className="btn btn-info btn-block mt-4"
+                />
               </form>
             </div>
           </div>
@@ -145,12 +153,14 @@ class AddExperience extends Component {
 AddExperience.propTypes = {
   addExperience: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   profile: state.profile,
-  errors: state.errors
+  errors: state.errors,
 });
 
-export default connect(mapStateToProps, { addExperience })(withRouter(AddExperience));
+export default connect(mapStateToProps, { addExperience })(
+  withRouter(AddExperience),
+);

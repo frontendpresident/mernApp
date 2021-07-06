@@ -28,17 +28,20 @@ class Navbar extends Component {
           </Link>
         </li>
         <li className="nav-item">
-          <Link to='/login'
-          onClick={this.onLogoutClick.bind(this)}
-          className="nav-link" 
+          <Link
+            to="/login"
+            onClick={this.onLogoutClick.bind(this)}
+            className="nav-link"
           >
-            <img className="rounded-circle"
-                src={user.avatar}
-                alt={user.name}
-                style={{ width: '25px', marginRight: '5px' }}
-                title="You must have a Gravatar connected to your email to display an image"/>
-                {' '} Logout
-                </Link>
+            <img
+              className="rounded-circle"
+              src={user.avatar}
+              alt={user.name}
+              style={{ width: '25px', marginRight: '5px' }}
+              title="You must have a Gravatar connected to your email to display an image"
+            />{' '}
+            Logout
+          </Link>
         </li>
       </ul>
     );
@@ -68,7 +71,8 @@ class Navbar extends Component {
             className="navbar-toggler"
             type="button"
             data-toggle="collapse"
-            data-target="#mobile-nav">
+            data-target="#mobile-nav"
+          >
             <span className="navbar-toggler-icon" />
           </button>
 
@@ -91,11 +95,13 @@ class Navbar extends Component {
 
 Navbar.propTypes = {
   logoutUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
+const mapStateToProps = (state) => ({
+  auth: state.auth,
 });
 
-export default connect(mapStateToProps, { logoutUser, clearCurrentProfile })(Navbar);
+export default connect(mapStateToProps, { logoutUser, clearCurrentProfile })(
+  Navbar,
+);

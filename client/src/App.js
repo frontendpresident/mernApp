@@ -8,7 +8,7 @@ import { logoutUser, setCurrentUser } from './redux/reducers/authReducer';
 import { clearCurrentProfile } from './redux/reducers/profileReducer';
 
 import Landing from './components/layout/Landing';
-import Navbar from './components/layout/Navbar'
+import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
@@ -23,19 +23,19 @@ import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
 import Posts from './components/posts/Posts';
 import Post from './components/post/Post';
-import NotFound from './components/not-found/NotFound'
+import NotFound from './components/not-found/NotFound';
 
 if (localStorage.jwtToken) {
-  setAutToken(localStorage.jwtToken)
+  setAutToken(localStorage.jwtToken);
 
-  const decode = jwt_decode(localStorage.jwtToken)
-  store.dispatch(setCurrentUser(decode))
+  const decode = jwt_decode(localStorage.jwtToken);
+  store.dispatch(setCurrentUser(decode));
 
-  const currentDate = Date.now() / 1000
+  const currentDate = Date.now() / 1000;
   if (decode.exp < currentDate) {
-    store.dispatch(logoutUser())
-    store.dispatch(clearCurrentProfile())
-    window.location.href = '/login'
+    store.dispatch(logoutUser());
+    store.dispatch(clearCurrentProfile());
+    window.location.href = '/login';
   }
 }
 
@@ -45,34 +45,50 @@ function App() {
       <Router>
         <div className="App">
           <Navbar />
-          <Route exact path='/' component={Landing} />
+          <Route exact path="/" component={Landing} />
           <div className="container">
-            <Route exact path='/register' component={Register} />
-            <Route exact path='/login' component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
             <Route exact path="/profiles" component={Profiles} />
             <Route exact path="/profile/:handle" component={Profile} />
             <Switch>
-                <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              </Switch>
-              <Switch>
-                <PrivateRoute exact path="/create-profile" component={CreateProfile} />
-              </Switch>
-              <Switch>
-                <PrivateRoute exact path="/edit-profile" component={EditProfile} />
-              </Switch>
-              <Switch>
-                <PrivateRoute exact path="/add-education" component={AddEducation} />
-              </Switch>
-              <Switch>
-                <PrivateRoute exact path="/add-experience" component={AddExperience} />
-              </Switch>
-              <Switch>
-                <PrivateRoute exact path="/feed" component={Posts} />
-              </Switch>
-              <Switch>
-                <PrivateRoute exact path="/post/:id" component={Post} />
-              </Switch>
-              <Route exact path="/not-found" component={NotFound} />
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            </Switch>
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/create-profile"
+                component={CreateProfile}
+              />
+            </Switch>
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/edit-profile"
+                component={EditProfile}
+              />
+            </Switch>
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/add-education"
+                component={AddEducation}
+              />
+            </Switch>
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/add-experience"
+                component={AddExperience}
+              />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path="/feed" component={Posts} />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path="/post/:id" component={Post} />
+            </Switch>
+            <Route exact path="/not-found" component={NotFound} />
           </div>
           <Footer />
         </div>

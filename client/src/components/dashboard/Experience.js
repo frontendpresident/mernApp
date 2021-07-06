@@ -10,7 +10,7 @@ class Experience extends Component {
   }
 
   render() {
-    const experience = this.props.experience.map(exp => (
+    const experience = this.props.experience.map((exp) => (
       <tr key={exp._id}>
         <td>{exp.company}</td>
         <td>{exp.title}</td>
@@ -25,7 +25,8 @@ class Experience extends Component {
         <td>
           <button
             onClick={this.onDeleteClick.bind(this, exp._id)}
-            className="btn btn-danger">
+            className="btn btn-danger"
+          >
             Delete
           </button>
         </td>
@@ -51,7 +52,7 @@ class Experience extends Component {
 }
 
 Experience.propTypes = {
-  deleteExperience: PropTypes.func.isRequired
+  deleteExperience: PropTypes.func.isRequired,
 };
 
 export default connect(null, { deleteExperience })(Experience);

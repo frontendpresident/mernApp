@@ -1,16 +1,16 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
-import { addPost } from "../../redux/reducers/postReducer";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
+import { addPost } from '../../redux/reducers/postReducer';
 
 class PostForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      text: "",
-      errors: {}
+      text: '',
+      errors: {},
     };
 
     this.onChange = this.onChange.bind(this);
@@ -31,11 +31,11 @@ class PostForm extends React.Component {
     const newPost = {
       text: this.state.text,
       name: user.name,
-      avatar: user.avatar
+      avatar: user.avatar,
     };
 
     this.props.addPost(newPost);
-    this.setState({ text: "" });
+    this.setState({ text: '' });
   }
 
   onChange(e) {
@@ -74,12 +74,12 @@ class PostForm extends React.Component {
 PostForm.propTypes = {
   addPost: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, { addPost })(PostForm);

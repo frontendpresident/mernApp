@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -11,7 +10,7 @@ class Education extends Component {
   }
 
   render() {
-    const education = this.props.education.map(edu => (
+    const education = this.props.education.map((edu) => (
       <tr key={edu._id}>
         <td>{edu.school}</td>
         <td>{edu.degree}</td>
@@ -26,7 +25,8 @@ class Education extends Component {
         <td>
           <button
             onClick={this.onDeleteClick.bind(this, edu._id)}
-            className="btn btn-danger">
+            className="btn btn-danger"
+          >
             Delete
           </button>
         </td>
@@ -52,7 +52,7 @@ class Education extends Component {
 }
 
 Education.propTypes = {
-  deleteEducation: PropTypes.func.isRequired
+  deleteEducation: PropTypes.func.isRequired,
 };
 
 export default connect(null, { deleteEducation })(Education);
