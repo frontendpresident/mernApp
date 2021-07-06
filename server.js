@@ -15,10 +15,6 @@ const corsOptn = {
 
 app.use(cors(corsOptn))
 
-app.get('/', (req, res) => {
-   return res.send('Hello!')
-});
-
 //DB config
 const db = require('./config/keys').URL
 
