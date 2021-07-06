@@ -1,6 +1,4 @@
-if(process.env.NODE_ENV === 'production') {
-    module.exports = require('./keys_prod')
-}
-else {
-    module.exports = require('./keys_dev')
+module.exports = {
+    URL: 'mongodb+srv://SMaifetov:SMaifetov_123321@cluster0.gkepf.mongodb.net/Mern-app?retryWrites=true&w=majority',
+    secretOrKey: 'secret'
 }
