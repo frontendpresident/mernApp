@@ -9,12 +9,6 @@ const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
 
-const corsOptn = {
-   origin: 'http://localhost:5001'
-}
-
-app.use(cors(corsOptn))
-
 //DB config
 const db = require('./config/keys').URL
 
